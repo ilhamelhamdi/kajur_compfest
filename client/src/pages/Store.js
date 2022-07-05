@@ -5,20 +5,28 @@ import _Template from './_Template'
 import ItemCard from '../components/ItemCard'
 import MobileNavBar from '../components/MobileNavBar'
 import { IsMobileContext } from '../context'
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { API_URL } from '../config'
 
 const StoreBody = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [items, setItems] = useState([])
   const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [sortByDate, setSortByDate] = useState('none')
-  const [sortByName, setSortByName] = useState('none')
+  const [sortByDate, setSortByDate] = useState(searchParams.get('sort_date') || 'none')
+  const [sortByName, setSortByName] = useState(searchParams.get('sort_name') || 'none')
 
-  useEffect(() => {
-    callAPI()
-  }, [])
+  let navigate = useNavigate()
+  let query = ''
+  // if (sortByDate !== 'none') {
+  //   query += `sort_date=${sortByDate}&`
+  // }
+  // if (sortByName !== 'none') {
+  //   query += `sort_name=${sortByName}&`
+  // }
 
   const callAPI = () => {
-    fetch("http://localhost:9000/items")
+    fetch(`${API_URL}/items${query}`)
       .then(res => res.json())
       .then(res => {
         setIsLoaded(true)
@@ -36,6 +44,22 @@ const StoreBody = () => {
   const handleSortByName = (e) => {
     setSortByName(e.target.value)
   }
+
+  useEffect(() => {
+    query = '?'
+    if (sortByDate !== 'none') {
+      query += `sort_date=${sortByDate}&`
+    }
+    if (sortByName !== 'none') {
+      query += `sort_name=${sortByName}&`
+    }
+    navigate(query, { replace: true })
+    setIsLoaded(false)
+  }, [sortByDate, sortByName])
+
+  useEffect(() => {
+    callAPI()
+  }, [sortByDate, sortByName])
 
   if (error) {
     return <div className='w-screen min-h-screen'>Error: {error.message}</div>
@@ -56,8 +80,8 @@ const StoreBody = () => {
             </select>
             <select value={sortByName} onChange={handleSortByName} className='inline-block bg-slate-800 hover:bg-slate-700 rounded-lg ml-4 text-center p-1'>
               <option value="none">Name</option>
-              <option value="ascending">Name : Ascending</option>
-              <option value="descending">Name : Descending</option>
+              <option value="asc">Name : Ascending</option>
+              <option value="desc">Name : Descending</option>
             </select>
           </div>
           <div className='flex flex-wrap justify-center'>

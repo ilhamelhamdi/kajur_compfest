@@ -1,4 +1,3 @@
-import dummyImage from '../img/cocacola.jpg'
 import { Link } from "react-router-dom"
 
 const ItemCard = ({ data: { _id, name, img_url, price, updatedAt } }) => {
@@ -13,9 +12,9 @@ const ItemCard = ({ data: { _id, name, img_url, price, updatedAt } }) => {
   return (
     <div className='h-full w-1/2 md:w-1/3 lg:w-1/5 flex-wrap p-2'>
       <Link to={`product/${_id}`} className='block h-full w-full bg-slate-800 rounded-lg overflow-hidden hover:text-sky-500 text-slate-50'>
-        <img src={dummyImage} alt="" className='w-full' />
+        <img src={img_url} alt="" className='w-full' />
         <div className='p-2 '>
-          <p className=''>{name}</p>
+          <p className='h-12 line-clamp-2 mb-2'>{name}</p>
           <p className='text-lg font-bold'>{`Rp${price}`}</p>
           <p className='text-sm text-slate-400 text-right'>{`Added ${hour}:${minute} ${monthList[month]} ${day}, ${year}`}</p>
         </div>

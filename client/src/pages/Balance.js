@@ -4,6 +4,7 @@ import { IsMobileContext } from "../context"
 import { useContext, useEffect, useState } from "react"
 import MobileNavBar from "../components/MobileNavBar"
 import { useSearchParams } from "react-router-dom"
+import { API_URL } from "../config"
 
 const BalanceContent = () => {
   const [yourBalance, setYourBalance] = useState(0)
@@ -20,7 +21,7 @@ const BalanceContent = () => {
   }
 
   const getStoreBalance = () => {
-    fetch(`http://localhost:9000/balance`)
+    fetch(`${API_URL}/balance`)
       .then(res => res.json())
       .then(res => {
         setStoreBalance(res.balance)
