@@ -9,8 +9,7 @@
     "scripts": {
         "server": "nodemon ./bin/www",
         "build": "cd client && npm install && npm run build",
-        "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
-        "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
+        "start": "npm run server"
     },
     "dependencies": {
         "cookie-parser": "~1.4.4",
