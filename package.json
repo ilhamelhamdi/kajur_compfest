@@ -8,8 +8,7 @@
     "private": true,
     "scripts": {
         "server": "nodemon ./bin/www",
-        "install-client": "cd client && npm install",
-        "build": "cd client && npm run build",
+        "build": "cd client && npm install && npm run build",
         "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
         "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
     },
