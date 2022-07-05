@@ -1,0 +1,52 @@
+React, Tailwind
+
+Hapi, 
+
+Front End Features
+  Store
+    Methods
+      1. Add
+      2. Get All
+      3. Buy & Remove
+      4. Sort (date & name)
+    Items
+      1. Name
+      2. Image
+      3. Desc
+      4. Price
+      5. TimeStamp
+
+  Balance's Box
+    Methods
+      1. Add (unlimited)
+      2. Withdraw
+
+Back End Features
+  /items
+    GET
+      res: 
+        body: id, name, image, desc, price, timestamp
+    GET[:id]
+      res: 
+        body: id, name, image, desc, price, timestamp
+    POST
+      req: name, image, desc, price
+      res: 
+        body: id
+        message: success/fail
+    PUT[:id]
+      res: 
+        message: success/fail
+    DELETE[:id]
+      res: 
+        message: success/fail
+
+  /balance
+    GET
+      res: 
+        body: balance
+    PUT
+      req:
+        body:
+          operator: add/subtract
+          value: (integer)
