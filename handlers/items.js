@@ -1,13 +1,16 @@
-const { getAllItemsModel, getItemByIdModel, postItemModel, putItemModel, deleteItemModel } = require('../models/items')
 const NotFoundError = require("../exceptions/NotFoundError")
+const ItemsService = require('../services/ItemsService')
+
+const itemsService = new ItemsService()
 
 const getAllItemsHandler = async (req, res) => {
   let items, response
   const sortName = req.query.sort_name
   const sortDate = req.query.sort_date
+  const name = req.query.name
   try {
     // Fetching data
-    items = await getAllItemsModel({ sortName, sortDate })
+    items = await itemsService.getAllItems({ sortName, sortDate, name })
 
     response = {
       status: "success",
@@ -29,7 +32,7 @@ const getItemByIdHandler = async (req, res) => {
 
   try {
     // Fetching and Checking data on DB
-    const item = await getItemByIdModel(id)
+    const item = await itemsService.getItemById(id)
     if (item === null) throw new NotFoundError("Id is not found.")
 
     // Sending response
@@ -51,7 +54,7 @@ const getItemByIdHandler = async (req, res) => {
 }
 
 const postItemHandler = async (req, res) => {
-  const { name, img_url, desc, price } = { ...req.body }
+  const { name, img, desc, price } = { ...req.body }
   const createdAt = new Date()
   const updatedAt = createdAt
 
@@ -61,8 +64,8 @@ const postItemHandler = async (req, res) => {
 
   // Adding to DB
   try {
-    const id = await postItemModel({
-      name, img_url, desc, price, createdAt, updatedAt
+    const id = await itemsService.addItem({
+      name, img, desc, price, createdAt, updatedAt
     })
 
     const response = {
@@ -91,7 +94,7 @@ const putItemHandler = async (req, res) => {
 
   try {
     const data = { name, img_url, desc, price, updatedAt }
-    const result = await putItemModel(id, data)
+    const result = await itemsService.updateItem(id, data)
 
     if (result.matchedCount === 0) throw new NotFoundError('Id was not found')
 
@@ -108,7 +111,7 @@ const putItemHandler = async (req, res) => {
       status: "fail",
       message: e.message
     }
-    res.status(e.statusCode | 500).json(response)
+    res.status(e.statusCode || 500).json(response)
   }
 }
 
@@ -117,8 +120,8 @@ const deleteItemHandler = async (req, res) => {
 
   try {
     // Deleting item on DB
-    const result = await deleteItemModel(id)
-    if (result.deletedCount === 0) throw new NotFoundError("Id is not found.")
+    const result = await itemsService.deleteItem(id)
+    if (result.deletedCount === 0) throw new NotFoundError("Item not found.")
 
     // Sending response
     const response = {

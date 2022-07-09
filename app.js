@@ -5,16 +5,19 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index')
+var loginRouter = require('./routes/login')
+var registerRouter = require('./routes/register')
 var itemsRouter = require('./routes/items')
 var balanceRouter = require('./routes/balance')
+
+var verifyToken = require('./middlewares/verifyToken')
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -23,13 +26,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, "./client/build")))
 
-app.get("/", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-})
 app.use('/api', indexRouter);
-app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/register', registerRouter);
 app.use('/api/items', itemsRouter)
-app.use('/api/balance', balanceRouter)
+app.use('/api/balance', verifyToken, balanceRouter)
+app.get("*", function (res, res) {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

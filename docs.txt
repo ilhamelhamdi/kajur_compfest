@@ -50,3 +50,20 @@ Back End Features
         body:
           operator: add/subtract
           value: (integer)
+
+  /login
+    POST
+      req:
+        body: id, pass
+      res:
+        message: success/fail
+        body: 
+          accessToken,
+          user: id, name
+      
+  /register
+    POST
+      req:
+        body: id, pass, name
+      res:
+        message: success/fail
