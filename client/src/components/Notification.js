@@ -5,11 +5,10 @@ import Button from "./Button"
 const Box = (props) => {
   const notification = useContext(NotificationContext)
   const close = () => {
-    console.log('Oh no! Clicked');
     notification.setFlag(false)
   }
   return (
-    <div className="fixed w-screen h-screen bg-slate-900/50 backdrop-blur-sm z-50 flex justify-center items-center" onClick={notification.isClosable ? close : () => {}}>
+    <div className="fixed w-screen h-screen bg-slate-900/50 backdrop-blur-sm z-50 flex justify-center items-center" onClick={notification.isClosable ? close : () => { }}>
       <div onClick={e => e.stopPropagation()} className={`bg-slate-800 focus:bg-white container w-full mx-4 max-w-xl rounded-xl p-8 ${props.className}`} style={{ minHeight: '16rem' }} id="notif-box">
         {props.children}
       </div>

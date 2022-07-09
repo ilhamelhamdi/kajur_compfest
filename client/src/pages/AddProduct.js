@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 import { useNavigate } from "react-router-dom"
 import { IsMobileContext, NotificationContext } from "../context"
-import MobileNavBar from "../components/MobileNavBar"
 import Template from "./Template"
 import Icon from "../img/index"
 import Button from "../components/Button"
@@ -68,10 +67,8 @@ const AddProductContent = () => {
           delete_url: API_IMAGE_SERVER_URL + '/' + uploadedImg.data.deletehash
         }
       }
-      console.log(data);
 
       const resultAPI = await APIUtils.post(`${API_URL}/items`, data, cookies.token)
-      console.log(resultAPI);
 
       // Popping Up Success Notification
       const isSuccess = (uploadedImg.success && (resultAPI.status === 'success'))
@@ -88,8 +85,6 @@ const AddProductContent = () => {
         notification.setFlag(true)
       }
 
-      // const deletedImg = await ImageUtils.deleteImg(data.img.delete_url)
-      // console.log(deletedImg);
     } catch (e) {
       console.log(e.message);
     }
@@ -105,20 +100,6 @@ const AddProductContent = () => {
     setProductPrice(normalized)
     document.getElementById('product-price').value = normalized
   }
-
-  // const cekImgur = async () => {
-  //   const options = {
-  //     referrerPolicy: "no-referrer",
-  //     mode: 'cors',
-  //     headers: {
-  //       'Authorization': 'Client-ID c025ce5cb3fa7d5'
-  //     }
-  //   }
-  //   const res = (await fetch('https://api.imgur.com/3/image/26IBDhO', options)).json()
-  //   console.log('checking');
-  //   return res
-  // }
-
 
   return (
     <div className="container xl:max-w-screen-xl flex flex-col lg:flex-row mx-auto text-white pt-20 lg:pt-0">

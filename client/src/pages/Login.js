@@ -30,9 +30,7 @@ const Login = () => {
     try {
       setIsLoading(true)
       const res = await APIUtils.post(`${API_URL}/login`, requestBody)
-      console.log(res);
       if (res.status === 'success') {
-        console.log(res.body);
         setCookies('isLogged', 1, { path: '/', maxAge: 3600 })
         setCookies('token', res.body.accessToken, { path: '/', maxAge: 3600 })
         setCookies('userId', res.body.user.userId, { path: '/', maxAge: 3600 })
@@ -46,7 +44,6 @@ const Login = () => {
           action: () => notification.setFlag(false)
         }])
         notification.setFlag(true)
-        console.log(res.message);
       }
       setIsLoading(false)
     } catch (e) {

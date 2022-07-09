@@ -29,9 +29,7 @@ const Register = () => {
     try {
       setIsLoading(true)
       const res = await APIUtils.post(`${API_URL}/register`, requestBody)
-      console.log(res);
       if (res.status === 'success') {
-        console.log(res.body);
         navigate('/login', { replace: true })
       } else {
         notification.setTitle('Register Failed')
@@ -41,7 +39,6 @@ const Register = () => {
           action: () => notification.setFlag(false)
         }])
         notification.setFlag(true)
-        console.log(res.message);
       }
       setIsLoading(false)
     } catch (e) {

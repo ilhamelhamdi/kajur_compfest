@@ -12,6 +12,7 @@ const onLoadingAction = (ctx) => {
 
 const onSuccessAction = (ctx, msg) => {
   ctx.setIsClosable(true)
+  ctx.setTitle('Success')
   ctx.setMessage(msg)
   ctx.setActions([{
     name: 'OK',
