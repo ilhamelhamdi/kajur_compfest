@@ -1,6 +1,6 @@
 // Change this to 'http://localhost:9000/api' if run it in development
-// const API_URL = window.location.protocol + '//' + window.location.host + '/api' //COMMENT THIS
-const API_URL = 'http://localhost:9000/api' //UNCOMMENT THIS
+const API_URL = window.location.protocol + '//' + window.location.host + '/api' //COMMENT THIS
+// const API_URL = 'http://localhost:9000/api' //UNCOMMENT THIS
 
 
 const API_IMAGE_SERVER_URL = 'https://api.imgur.com/3/image'
