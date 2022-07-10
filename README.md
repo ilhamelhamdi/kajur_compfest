@@ -32,7 +32,7 @@ If you want to run both app (server & client) in development mode. You can follo
 
 That's it!!!
 
-## API Endpoints {#api-endpoints}
+## API Endpoints
 This project uses ```{hostname}/api``` for API root path. The following is our API endpoints along with its methods, requests, and response.
 
 ### ```/api/login```
