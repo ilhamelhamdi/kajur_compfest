@@ -1,4 +1,6 @@
 # SEA Canteen Web App
+For production, this project is deployed at https://canteen-elhamdi.herokuapp.com/. You can check and see it!
+
 ## Introduction
 Hello fellas developers, this project is dedicated to fulfill a prerequisite task from Software Engine Academy of Compfest 2022. The task is to make basic web app system for "Kantin Kejujuran", which is basically a simple corner store/canteen in a virtual school that expects its students to make transaction in that store honestly. 
 
@@ -8,8 +10,17 @@ In order to make such system, this project is designed to be build in full stack
 The web system is basically simple. When user request to the server at root path url, the server send client side app to the user. So, everything related to views matter that user request will be handled by client app. When the client need some data to be displayed, it will request to our API server. For more detailed information about API endpoints, check the API Endpoint section.
 
 ## Installation
-In this project, we mainly use NPM as our package manager, which is already installed if we install Node JS. So, this is the way how we can install this project on localhost for development.
+In this project, we mainly use NPM as our package manager, which is already installed if we install Node JS. So, these are two ways you can install this project on localhost for development.
 
+You can run server app in development mode, while the client app is built
+1. Clone this project
+2. Install dependencies for server app. In a terminal, run ```npm install && npm install -D```
+3. Build client app. Run ```npm run build```
+4. Back to root folder project. Run ```cd ..```
+5. Run server app. Run ```npm run start-server-dev```
+6. Open 'http://localhost:9000' in browser
+
+If you want to run both app (server & client) in development mode. You can follow this.
 1. Clone this project
 2. Install dependencies for server app. In a terminal, run ```npm install && npm install -D```
 3. Go to client app folder and install its dependencies. Run ```cd client && npm install && npm install -D```
@@ -17,5 +28,6 @@ In this project, we mainly use NPM as our package manager, which is already inst
 5. Back to root folder project. Run ```cd ..```
 6. Run server app. Run ```npm run start-server-dev```
 7. Run client app on the other terminal. Run ```npm run start-client-dev```
+8. Open 'http://localhost:3000' in browser
 
 That's it!!!
