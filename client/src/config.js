@@ -1,4 +1,5 @@
-const API_URL = window.location.host + '/api' // Change this to 'http://localhost:9000/api' if run it in development
+const API_URL = window.location.protocol + '//' + window.location.host + '/api'
+// Change this to 'http://localhost:9000/api' if run it in development
 
 
 const API_IMAGE_SERVER_URL = 'https://api.imgur.com/3/image'
