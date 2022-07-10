@@ -13,7 +13,7 @@ In this project, we mainly use NPM as our package manager, which is already inst
 1. Clone this project
 2. Install dependencies for server app. In a terminal, run ```npm install && npm install -D```
 3. Go to client app folder and install its dependencies. Run ```cd client && npm install && npm install -D```
-4. Open **config.js** in */client/src* folder. Change the value of **API_URL** variable to 'http://localhost:9000/api'
+4. Open *config.js* in **/client/src** folder. Change the value of **API_URL** variable to 'http://localhost:9000/api'
 5. Back to root folder project. Run ```cd ..```
 6. Run server app. Run ```npm run start-server-dev```
 7. Run client app on the other terminal. Run ```npm run start-client-dev```
