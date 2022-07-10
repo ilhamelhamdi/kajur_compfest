@@ -1,7 +1,5 @@
 React, Tailwind
 
-Hapi, 
-
 Front End Features
   Store
     Methods
