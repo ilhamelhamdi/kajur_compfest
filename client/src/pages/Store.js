@@ -35,7 +35,11 @@ const StoreContent = () => {
   const fetchItems = async () => {
     try {
       const res = await APIUtils.get(`${API_URL}/items${query}`)
-      if (res.body.items.length === 0) setIsEmpty(true)
+      if (res.body.items.length === 0) {
+        setIsEmpty(true)
+      } else {
+        setIsEmpty(false)
+      }
       setItems(res.body.items)
       setIsLoaded(true)
     } catch (err) {
@@ -107,8 +111,23 @@ const StoreContent = () => {
             </select>
           </div>
           <div className='flex flex-wrap justify-center'>
-            {isLoaded ?
-              items.map(item => (<ItemCard data={item} key={item._id} />)) :
+            {isLoaded ? (
+              !isEmpty ?
+                items.map(item => (<ItemCard data={item} key={item._id} />)) :
+                <>
+                  <div className="container xl:max-w-screen-xl mx-auto flex flex-col justify-center font-mono text-center mt-20 px-4 lg:mt-0 pt-20 lg:pt-0">
+                    <div className=" text-sky-500 text-8xl  font-bold">Empty Stock</div>
+                    <div className="text-white text-3xl font-bold mb-8">It looks like the store has no product yet.</div>
+                    <div className='max-w-6xl flex justify-center'>
+                      <img src={EmptyImage} alt="" className='' />
+                    </div>
+                  </div>
+                  <Link to={'add-product'}>
+                    {/* <div className='animate-ping w-4 h-4 rounded-full bg-sky-500'></div> */}
+                    <Button name={<span className='text-5xl lg:text-6xl font-bold '>+</span>} className="fixed bottom-24 right-4 lg:bottom-20 lg:right-20 rounded-full h-16 w-16 lg:h-20 lg:w-20 flex justify-center text-slate-900 bg-sky-500 lg:text-sky-500 lg:bg-slate-900 animate-bounce transition hover:animate-none" />
+                  </Link>
+                </>
+            ) :
               [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => <ItemCardSkeleton key={i} />)
             }
           </div>
